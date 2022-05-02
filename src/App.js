@@ -1,25 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Header from "./components/Header/Header";
+import LeftSideBar from "./components/LeftSideBar/LeftSideBar";
+import NewReleased from "./components/NewReleased/NewReleased";
+import PopularGame from "./components/PopularGame/PopularGame";
+import RightSidebar from "./components/RightSidebar/RightSidebar";
+import Slider from "./components/Slider/Slider";
+import styled from "styled-components";
+import "./index.css";
+import { ThemeContext, ThemeProvider } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
-function App() {
+import { DarkTheme, LightTheme } from "./styles/index";
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: ${(props) => props.theme.backgroundColorLeftSidebar};
+  }
+`;
+
+const AppWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 130px 1fr 326px;
+  justify-items: stretch;
+  align-items: stretch;
+  background-color: ${(props) => props.theme.backgroundColorLeftSidebar};
+`;
+
+const MainWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 40px 0px 0px 40px;
+  background-color: ${(props) => props.theme.backgroundColor};
+  padding: 1px 10px;
+`;
+
+// #при оновленні localStorage
+// #покрасити root
+// #animation
+
+const App = () => {
+  const [theme, toggleTheme] = useState("light");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <ThemeProvider theme={theme === "light" ? LightTheme : DarkTheme}>
+          <AppWrapper>
+            <LeftSideBar />
+            <MainWrapper>
+              <Header />
+              <Slider />
+              <PopularGame />
+              <NewReleased />
+            </MainWrapper>
+            <RightSidebar />
+          </AppWrapper>
+          <GlobalStyle />
+        </ThemeProvider>
+      </ThemeContext.Provider>
+    </>
   );
-}
+};
 
 export default App;
