@@ -23,3 +23,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 ### `npm start`
+
+![](https://cdn-icons-png.flaticon.com/512/5968/5968705.png)
+figma templates:
+https://www.figma.com/file/Y3dtC5UYJTjdj44JPj5iVv/gaming-Dashboard-(Copy)?node-id=0%3A1
